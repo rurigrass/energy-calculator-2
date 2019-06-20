@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import EnergyCalculator from "./components/EnergyCalculator";
+import CalculatorResult from "./components/CalculatorResult";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    result: null
+  };
+
+  calculateResult = info => {
+    let result;
+    if (info.energyType === "electric") {
+      const longResult = info.energyAmount * 0.1301;
+      result = longResult.toFixed(2);
+    } else {
+      const byVCF = info.energyAmount * 1.02264 * 40;
+      const byCV = byVCF / 3.6;
+      const kWHCF = byCV * 0.03678;
+      result = kWHCF.toFixed(2);
+    }
+    this.setState({
+      result
+    });
+  };
+
+  render() {
+    let calculatorResult = null;
+    if (this.state.result) {
+      calculatorResult = <CalculatorResult result={this.state.result} />;
+    }
+
+    return (
+      <div className="ui container" style={{ marginTop: "10px" }}>
+        <h1 style={{ textAlign: "center" }}>Energy Price Calculator</h1>
+        <EnergyCalculator onSubmit={this.calculateResult} />
+        {calculatorResult}
+      </div>
+    );
+  }
 }
 
 export default App;
