@@ -30,10 +30,12 @@ class App extends Component {
     }
 
     return (
-      <div className="ui container" style={{ marginTop: "10px" }}>
-        <h1 style={{ textAlign: "center" }}>Energy Price Calculator</h1>
-        <EnergyCalculator onSubmit={this.calculateResult} />
-        {calculatorResult}
+      <div style={{ maxWidth: "500px", margin: "auto" }}>
+        <div className="ui container" style={{ marginTop: "100px" }}>
+          <h1 style={{ textAlign: "center" }}>Energy Price Calculator</h1>
+          <EnergyCalculator onSubmit={this.calculateResult} />
+          {calculatorResult}
+        </div>
       </div>
     );
   }

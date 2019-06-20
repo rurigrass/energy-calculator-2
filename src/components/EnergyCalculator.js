@@ -15,7 +15,9 @@ class EnergyCalculator extends Component {
 
   render() {
     return (
-      <div className="ui segment">
+      <div className="ui segment" 
+      //  style={{ maxWidth: "500px" }}
+       >
         <form onSubmit={this.onFormSubmit} className="ui form">
           <RadioToggle
             energyType={e => {
