@@ -1,20 +1,28 @@
 import React from "react";
 
 const CalculatorResult = props => {
-  //   let priceTotal = props.unitTotal + props.standingTotal;
-  //   console.log(priceTotal);
+
 
   return (
-    <div className="ui green inverted segment">
-      <h1 className="ui header" style={{ textAlign: "center" }}>
-        unit charge £ {props.unitTotal.toFixed(2)}
-      </h1>
-      <h1 className="ui header" style={{ textAlign: "center" }}>
-        standing charge £ {props.standingTotal.toFixed(2)}
-      </h1>
-      <h1 className="ui header" style={{ textAlign: "center" }}>
-        standing charge £ {props.priceTotal.toFixed(2)}
-      </h1>
+    <div className="ui segment">
+    Current cost for X days
+    <br/>
+      <table class="ui celled table">
+        <thead>
+          <tr><th>Usage</th>
+            <th>Energy Cost</th>
+            <th>Standing Charge</th>
+            <th>Total</th>
+          </tr></thead>
+        <tbody>
+          <tr>
+            <td data-label="Usage"></td>
+            <td data-label="Energy Cost">£ {props.unitTotal.toFixed(2)}</td>
+            <td data-label="Standing Charge">£ {props.standingTotal.toFixed(2)}</td>
+            <td data-label="Total">£ {props.priceTotal.toFixed(2)}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
