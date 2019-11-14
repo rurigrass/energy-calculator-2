@@ -5,7 +5,10 @@ import EnergyInput from "./EnergyInput/EnergyInput";
 class EnergyCalculator extends Component {
   state = {
     energyType: "electric",
-    energyAmount: null
+    firstEnergyAmount: null,
+    firstReadingDate: null,
+    secondEnergyAmount: null,
+    secondReadingDate: null
   };
 
   onFormSubmit = event => {
@@ -15,9 +18,7 @@ class EnergyCalculator extends Component {
 
   render() {
     return (
-      <div className="ui segment" 
-      //  style={{ maxWidth: "500px" }}
-       >
+      <div className="ui segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
           <RadioToggle
             energyType={e => {
@@ -27,9 +28,27 @@ class EnergyCalculator extends Component {
           />
           <EnergyInput
             energyAmount={e => {
-              this.setState({ energyAmount: e.target.value });
+              this.setState({ firstEnergyAmount: e.target.value });
+            }}
+            readingDate={e => {
+              const firstReadingDate =
+                new Date(`${e.target.value}`).getTime() / 1000;
+              this.setState({ firstReadingDate });
             }}
             energyType={this.state.energyType}
+            readingType="first"
+          />
+          <EnergyInput
+            energyAmount={e => {
+              this.setState({ secondEnergyAmount: e.target.value });
+            }}
+            readingDate={e => {
+              const secondReadingDate =
+                new Date(`${e.target.value}`).getTime() / 1000;
+              this.setState({ secondReadingDate });
+            }}
+            energyType={this.state.energyType}
+            readingType="second"
           />
           <button
             className="ui inverted green button"

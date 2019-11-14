@@ -1,22 +1,28 @@
 import React from "react";
 
-const EnergyInput = props => {    
+const EnergyInput = props => {
   return (
     <div className="ui right labeled input" style={{ marginTop: "10px" }}>
-      {props.energyType === "electric" ? (
-        <input
-          type="number"
-          max="999999"
-          placeholder="Enter kWh"
-          onChange={props.energyAmount}
-        />
+      {props.readingType === "first" ? (
+        <div>
+          <input
+            type="number"
+            max="999999"
+            placeholder="First Reading"
+            onChange={props.energyAmount}
+          />
+          <input type="date" onChange={props.readingDate} />
+        </div>
       ) : (
-        <input
-          type="number"
-          max="999999"
-          placeholder="Enter m³"
-          onChange={props.energyAmount}
-        />
+        <div>
+          <input
+            type="number"
+            max="999999"
+            placeholder="Second Reading"
+            onChange={props.energyAmount}
+          />
+          <input type="date" onChange={props.readingDate} />
+        </div>
       )}
       {props.energyType === "electric" ? (
         <div className="ui basic label">kWh</div>
