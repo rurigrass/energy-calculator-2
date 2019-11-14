@@ -4,6 +4,7 @@ import EnergyInput from "./EnergyInput/EnergyInput";
 
 class EnergyCalculator extends Component {
   state = {
+    meterType: "1-rate",
     energyType: "electric",
     firstEnergyAmount: null,
     firstReadingDate: null,
@@ -21,9 +22,19 @@ class EnergyCalculator extends Component {
       <div className="ui segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
           <RadioToggle
-            energyType={e => {
+            type={e => {
+              this.setState({ meterType: e.target.name });
+            }}
+            option1="1-rate"
+            option2="2-rate"
+            checked={this.state.meterType}
+          />
+          <RadioToggle
+            type={e => {
               this.setState({ energyType: e.target.name });
             }}
+            option1="electric"
+            option2="gas"
             checked={this.state.energyType}
           />
           <EnergyInput

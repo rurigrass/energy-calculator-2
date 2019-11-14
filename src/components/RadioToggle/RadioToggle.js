@@ -6,20 +6,20 @@ const RadioToggle = props => {
       <div className="ui radio checkbox">
         <input
           type="radio"
-          name="electric"
-          checked={props.checked === "electric"}
-          onChange={props.energyType}
+          name={props.option1}
+          checked={props.checked === props.option1}
+          onChange={props.type}
         />
-        <label>Electric</label>
+        <label>{props.option1}</label>
       </div>
       <div className="ui radio checkbox" style={{ marginLeft: "10px" }}>
         <input
           type="radio"
-          name="gas"
-          checked={props.checked === "gas"}
-          onChange={props.energyType}
+          name={props.option2}
+          checked={props.checked === props.option2}
+          onChange={props.type}
         />
-        <label>Gas</label>
+        <label>{props.option2}</label>
       </div>
     </div>
   );

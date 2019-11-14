@@ -6,37 +6,38 @@ class App extends Component {
   state = {
     unitTotal: null,
     standingTotal: null,
-    // priceTotal: null
+    priceTotal: null
   };
 
   calculateResult = info => {
     const energyAmount = info.secondEnergyAmount - info.firstEnergyAmount;
     const timeAmount = info.secondReadingDate - info.firstReadingDate;
     const daysAmount = Math.floor(timeAmount / 86400);
-    let unitTotal, standingTotal
-    // priceTotal;
+    let unitTotal, standingTotal, priceTotal;
     //CALCULATE STANDING CHARGE
     const longResult = daysAmount * 0.2044;
-    standingTotal = longResult.toFixed(2);
+    standingTotal = longResult;
     //CALC UNIT CHARGE ELEC
     if (info.energyType === "electric") {
       const longResult = energyAmount * 0.1301;
-      unitTotal = longResult.toFixed(2);
+      unitTotal = longResult;
     } else {
       //CALC UNIT CHARGE GAS
       const byVCF = energyAmount * 1.02264 * 40;
       const byCV = byVCF / 3.6;
       const kWHCF = byCV * 0.03678;
-      unitTotal = kWHCF.toFixed(2);
+      unitTotal = kWHCF;
     }
     // console.log(unitTotal);
     // console.log(standingTotal);
-    // priceTotal = unitTotal + standingTotal;
+    priceTotal = unitTotal + standingTotal;
+    console.log(priceTotal);
+    
     // console.log(parseInt(priceTotal));
     this.setState({
       unitTotal,
-      standingTotal
-      // priceTotal
+      standingTotal,
+      priceTotal
     });
   };
 
@@ -49,6 +50,7 @@ class App extends Component {
         <CalculatorResult
           unitTotal={this.state.unitTotal}
           standingTotal={this.state.standingTotal}
+          priceTotal={this.state.priceTotal}
         />
       );
     }
