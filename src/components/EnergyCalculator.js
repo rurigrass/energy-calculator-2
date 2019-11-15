@@ -1,6 +1,8 @@
-import React, { Component } from "react";
-import RadioToggle from "./RadioToggle/RadioToggle";
-import EnergyInput from "./EnergyInput/EnergyInput";
+import React, { Component } from 'react';
+
+import EnergyInput from './EnergyInput/EnergyInput';
+import { Postcode } from './Postcode';
+import RadioGroup from './RadioToggle/RadioGroup';
 
 class EnergyCalculator extends Component {
   state = {
@@ -21,24 +23,25 @@ class EnergyCalculator extends Component {
     return (
       <div className="ui compact segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
-          <RadioToggle
-            type={e => {
+          <Postcode />
+          <RadioGroup
+            name="Meter Type"
+            changeFn={e => {
               this.setState({ meterType: e.target.name });
             }}
-            option1="1-rate"
-            option2="2-rate"
-            checked={this.state.meterType}
+            options={["1-rate", "2-rate"]}
+            selectedOption={this.state.meterType}
           />
-          <p>Fuel Type</p>
-          <RadioToggle
-            type={e => {
-              this.setState({ energyType: e.target.name });
+
+          <RadioGroup
+            name="Fuel Type"
+            changeFn={e => {
+              this.setState({ meterType: e.target.name });
             }}
-            option1="electric"
-            option2="gas"
-            checked={this.state.energyType}
+            options={["Electricity", "Gas"]}
+            selectedOption={this.state.energyType}
           />
-          <br/>
+
           Previous reading
           <EnergyInput
             energyAmount={e => {

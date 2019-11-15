@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const RadioToggle = props => {
   return (
@@ -6,20 +6,20 @@ const RadioToggle = props => {
       <div className="ui radio checkbox">
         <input
           type="radio"
-          name={props.option1}
-          checked={props.checked === props.option1}
-          onChange={props.type}
+          name="electric"
+          checked={props.checked === "electric"}
+          onChange={props.energyType}
         />
-        <label>{props.option1}</label>
+        <label>Electric</label>
       </div>
       <div className="ui radio checkbox" style={{ marginLeft: "10px" }}>
         <input
           type="radio"
-          name={props.option2}
-          checked={props.checked === props.option2}
-          onChange={props.type}
+          name="gas"
+          checked={props.checked === "gas"}
+          onChange={props.energyType}
         />
-        <label>{props.option2}</label>
+        <label>Gas</label>
       </div>
     </div>
   );
