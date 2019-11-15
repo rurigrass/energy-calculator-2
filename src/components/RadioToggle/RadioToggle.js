@@ -15,8 +15,8 @@ const RadioToggle = props => {
       <div className="ui radio checkbox" style={{ marginLeft: "10px" }}>
         <input
           type="radio"
-          name="gas"
-          checked={props.checked === "gas"}
+          name="Gas"
+          checked={props.checked === "Gas"}
           onChange={props.energyType}
         />
         <label>Gas</label>

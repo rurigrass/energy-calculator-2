@@ -8,7 +8,7 @@ import NextStatementDateInput from "./NextStatementDateInput/NextStatementDateIn
 class EnergyCalculator extends Component {
   state = {
     meterType: "1-rate",
-    energyType: "electricity",
+    energyType: "Electricity",
     firstEnergyAmount: null,
     firstReadingDate: null,
     secondEnergyAmount: null,
@@ -26,19 +26,19 @@ class EnergyCalculator extends Component {
       <div className="ui compact segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
           <Postcode />
-          <RadioGroup
+          {/* <RadioGroup
             name="Meter Type"
             changeFn={e => {
               this.setState({ meterType: e.target.name });
             }}
             options={["1-rate", "2-rate"]}
             selectedOption={this.state.meterType}
-          />
+          /> */}
 
           <RadioGroup
             name="Fuel Type"
             changeFn={e => {
-              this.setState({ meterType: e.target.name });
+              this.setState({ energyType: e.target.name });
             }}
             options={["Electricity", "Gas"]}
             selectedOption={this.state.energyType}
@@ -50,8 +50,7 @@ class EnergyCalculator extends Component {
               this.setState({ firstEnergyAmount: e.target.value });
             }}
             readingDate={e => {
-              const firstReadingDate =
-                new Date(`${e.target.value}`).getTime() / 1000;
+              const firstReadingDate = new Date(`${e.target.value}`);
               this.setState({ firstReadingDate });
             }}
             energyType={this.state.energyType}
@@ -65,8 +64,7 @@ class EnergyCalculator extends Component {
               this.setState({ secondEnergyAmount: e.target.value });
             }}
             readingDate={e => {
-              const secondReadingDate =
-                new Date(`${e.target.value}`).getTime() / 1000;
+              const secondReadingDate = new Date(`${e.target.value}`);
               this.setState({ secondReadingDate });
             }}
             energyType={this.state.energyType}
@@ -77,9 +75,10 @@ class EnergyCalculator extends Component {
           Next statement date (optional)
           <NextStatementDateInput
             statementDate={e => {
-              const nextStatementDate =
-                new Date(`${e.target.value}`).getTime() / 1000;
+              const nextStatementDate = new Date(`${e.target.value}`)
               this.setState({ nextStatementDate });
+              console.log(nextStatementDate);
+
             }}
           />
           <br /><br />

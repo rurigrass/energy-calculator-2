@@ -14,7 +14,7 @@ export const Postcode = () => {
   return (
   <Wrapper>
     <label>Postcode</label>
-    <div class="ui input">
+    <div className="ui input">
       <input type="text" />
     </div>
   </Wrapper>

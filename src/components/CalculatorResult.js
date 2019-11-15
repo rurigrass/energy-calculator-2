@@ -39,10 +39,22 @@ const CalculatorResult = props => {
             </tr></thead>
           <tbody>
             <tr>
-              <td data-label="Usage">{props.energyTotal}</td>
-              <td data-label="Energy Cost">£ {props.unitTotal.toFixed(2)}</td>
-              <td data-label="Standing Charge">£ {props.standingTotal.toFixed(2)}</td>
-              <td data-label="Total">£ {props.priceTotal.toFixed(2)}</td>
+              <td data-label="Usage">
+              2942
+              {/* {props.energyTotal} */}
+              </td>
+              <td data-label="Energy Cost">
+              £ 382.78
+              {/* {props.unitTotal.toFixed(2)} */}
+              </td>
+              <td data-label="Standing Charge">
+              £ 6.13
+              {/* {props.standingTotal.toFixed(2)} */}
+              </td>
+              <td data-label="Total">
+              £ 388.90
+              {/* {props.priceTotal.toFixed(2)} */}
+              </td>
             </tr>
           </tbody>
         </table>

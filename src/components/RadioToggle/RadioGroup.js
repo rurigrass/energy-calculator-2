@@ -11,18 +11,16 @@ const Wrapper = styled.div`
 `;
 
 const RadioGroup = props => {
-  const { name, selectedOption, options, changeFn} = props;
+  const { name, selectedOption, options, changeFn } = props;
 
-  console.log('name: ', name);
-  console.log('options: ', options);
-  console.log('selectedOption: ', selectedOption);
+  
   return (
     <Wrapper>
       <h5>{name}</h5>
       {
         options.map((option => {
           return (
-            <div className="ui radio checkbox">
+            <div key={`radio-${option}`} className="ui radio checkbox">
               <input
                 type="radio"
                 name={option}
@@ -32,7 +30,7 @@ const RadioGroup = props => {
               <label>{option}</label>
             </div>
           );
-      }))
+        }))
       }
     </Wrapper>
   );
