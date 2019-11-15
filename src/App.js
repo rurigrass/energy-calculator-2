@@ -4,26 +4,29 @@ import CalculatorResult from "./components/CalculatorResult";
 
 class App extends Component {
   state = {
+    energyType: null,
     unitTotal: null,
     standingTotal: null,
-    priceTotal: null
+    priceTotal: null,
+    daysTotal: null,
+    energyTotal: null
   };
 
   calculateResult = info => {
-    const energyAmount = info.secondEnergyAmount - info.firstEnergyAmount;
+    const energyTotal = info.secondEnergyAmount - info.firstEnergyAmount;
     const timeAmount = info.secondReadingDate - info.firstReadingDate;
-    const daysAmount = Math.floor(timeAmount / 86400);
+    const daysTotal = Math.floor(timeAmount / 86400);
     let unitTotal, standingTotal, priceTotal;
     //CALCULATE STANDING CHARGE
-    const longResult = daysAmount * 0.2044;
+    const longResult = daysTotal * 0.2044;
     standingTotal = longResult;
     //CALC UNIT CHARGE ELEC
-    if (info.energyType === "electric") {
-      const longResult = energyAmount * 0.1301;
+    if (info.energyType === "electricity") {
+      const longResult = energyTotal * 0.1301;
       unitTotal = longResult;
     } else {
       //CALC UNIT CHARGE GAS
-      const byVCF = energyAmount * 1.02264 * 40;
+      const byVCF = energyTotal * 1.02264 * 40;
       const byCV = byVCF / 3.6;
       const kWHCF = byCV * 0.03678;
       unitTotal = kWHCF;
@@ -31,32 +34,38 @@ class App extends Component {
     // console.log(unitTotal);
     // console.log(standingTotal);
     priceTotal = unitTotal + standingTotal;
-    console.log(priceTotal);
-    
-    // console.log(parseInt(priceTotal));
+
     this.setState({
+      energyType: info.energyType,
       unitTotal,
       standingTotal,
-      priceTotal
+      priceTotal,
+      daysTotal,
+      energyTotal,
+      nextStatementDate: info.nextStatementDate
     });
   };
 
   render() {
-    // console.log(this.state);
+   
+    console.log(this.state);
 
     let calculatorResult = null;
     if (this.state.unitTotal) {
       calculatorResult = (
         <CalculatorResult
+          energyType={this.state.energyType}
           unitTotal={this.state.unitTotal}
           standingTotal={this.state.standingTotal}
           priceTotal={this.state.priceTotal}
+          daysTotal={this.state.daysTotal}
+          energyTotal={this.state.energyTotal}
         />
       );
     }
 
     return (
-      <div style={{ maxWidth: "500px", margin: "auto" }}>
+      <div style={{ maxWidth: "400px", margin: "auto" }}>
         <div className="ui container" style={{ marginTop: "100px" }}>
           <h1 style={{ textAlign: "center" }}>Energy Price Calculator</h1>
           <EnergyCalculator onSubmit={this.calculateResult} />

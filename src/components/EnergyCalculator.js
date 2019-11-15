@@ -3,15 +3,17 @@ import React, { Component } from 'react';
 import EnergyInput from './EnergyInput/EnergyInput';
 import { Postcode } from './Postcode';
 import RadioGroup from './RadioToggle/RadioGroup';
+import NextStatementDateInput from "./NextStatementDateInput/NextStatementDateInput";
 
 class EnergyCalculator extends Component {
   state = {
     meterType: "1-rate",
-    energyType: "electric",
+    energyType: "electricity",
     firstEnergyAmount: null,
     firstReadingDate: null,
     secondEnergyAmount: null,
-    secondReadingDate: null
+    secondReadingDate: null,
+    nextStatementDate: null
   };
 
   onFormSubmit = event => {
@@ -55,9 +57,9 @@ class EnergyCalculator extends Component {
             energyType={this.state.energyType}
             readingType="first"
           />
-          <br/>
-          <br/>
-          New Reading
+          <br />
+          <br />
+          New reading
           <EnergyInput
             energyAmount={e => {
               this.setState({ secondEnergyAmount: e.target.value });
@@ -70,9 +72,19 @@ class EnergyCalculator extends Component {
             energyType={this.state.energyType}
             readingType="second"
           />
-          <br/><br/>
+          <br />
+          <br />
+          Next statement date (optional)
+          <NextStatementDateInput
+            statementDate={e => {
+              const nextStatementDate =
+                new Date(`${e.target.value}`).getTime() / 1000;
+              this.setState({ nextStatementDate });
+            }}
+          />
+          <br /><br />
           <button
-            className="ui inverted green button"
+            className="ui green button"
             style={{ float: "right" }}
             onClick={this.onFormSubmit}
           >

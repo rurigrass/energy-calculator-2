@@ -24,7 +24,7 @@ const EnergyInput = props => {
           <input type="date" onChange={props.readingDate} />
         </div>
       )}
-      {props.energyType === "electric" ? (
+      {props.energyType === "electricity" ? (
         <div className="ui basic label">kWh</div>
       ) : (
         <div className="ui basic label">m³</div>
