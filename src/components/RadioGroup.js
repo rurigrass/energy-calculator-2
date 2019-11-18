@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
+import SectionTitle from './SectionTitle';
+
 const Wrapper = styled.div`
   width: 50%;
 
@@ -13,10 +15,10 @@ const Wrapper = styled.div`
 const RadioGroup = props => {
   const { name, selectedOption, options, changeFn } = props;
 
-  
+
   return (
     <Wrapper>
-      <h5>{name}</h5>
+      <SectionTitle>{name}</SectionTitle>
       {
         options.map((option => {
           return (

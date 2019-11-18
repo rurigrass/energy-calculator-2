@@ -1,11 +1,24 @@
-import React, { Component } from "react";
-import EnergyCalculator from "./components/EnergyCalculator";
-import CalculatorResult from "./components/CalculatorResult";
+import { differenceInDays, subMonths } from 'date-fns';
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import differenceInDays from "date-fns/differenceInDays"
-// import { format } from "date-fns/esm/fp";
-import { subMonths } from "date-fns/fp";
-// var differenceInDays = require('date-fns/differenceInDays')
+import CalculatorResult from './components/CalculatorResult';
+import EnergyCalculator from './components/EnergyCalculator';
+
+const AppContainer = styled.div`
+  max-width: 500px;
+  margin:  0 auto;
+  font-family: Graphik;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 22px;
+  color: #FFFFFF;
+`;
 
 class App extends Component {
   state = {
@@ -23,7 +36,7 @@ class App extends Component {
     // const timeAmount = info.secondReadingDate - info.firstReadingDate;
     // const daysTotal = Math.floor(timeAmount / 86400);
     // console.log(format("dd/MM/yyyy", info.secondReadingDate));
-    
+
     const daysTotal = differenceInDays(info.secondReadingDate, info.firstReadingDate);
     let unitTotal, standingTotal, priceTotal;
     //CALCULATE STANDING CHARGE
@@ -48,7 +61,7 @@ class App extends Component {
     console.log(info.nextStatementDate);
     const prevMonth = subMonths(info.nextStatementDate, 1);
     console.log(prevMonth);
-    
+
 
     this.setState({
       energyType: info.energyType,
@@ -62,7 +75,7 @@ class App extends Component {
   };
 
   render() {
-   
+
     console.log(this.state);
 
     let calculatorResult = null;
@@ -80,13 +93,13 @@ class App extends Component {
     }
 
     return (
-      <div style={{ maxWidth: "400px", margin: "auto" }}>
+      <AppContainer>
         <div className="ui container" style={{ marginTop: "20px" }}>
-          <h1 style={{ textAlign: "center" }}>Energy Price Calculator</h1>
+          <Title >Energy Price Calculator</Title>
           <EnergyCalculator onSubmit={this.calculateResult} />
           {calculatorResult}
         </div>
-      </div>
+      </AppContainer>
     );
   }
 }

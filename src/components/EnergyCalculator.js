@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
+import AddReadingSection from './AddReadingSection';
 import EnergyInput from './EnergyInput/EnergyInput';
-import { Postcode } from './Postcode';
-import RadioGroup from './RadioToggle/RadioGroup';
-import NextStatementDateInput from "./NextStatementDateInput/NextStatementDateInput";
+import NextStatementDateInput from './NextStatementDateInput/NextStatementDateInput';
+import Postcode from './Postcode';
+import RadioGroup from './RadioGroup';
+import SectionTitle from './SectionTitle';
 
 class EnergyCalculator extends Component {
   state = {
@@ -26,14 +28,6 @@ class EnergyCalculator extends Component {
       <div className="ui compact segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
           <Postcode />
-          {/* <RadioGroup
-            name="Meter Type"
-            changeFn={e => {
-              this.setState({ meterType: e.target.name });
-            }}
-            options={["1-rate", "2-rate"]}
-            selectedOption={this.state.meterType}
-          /> */}
 
           <RadioGroup
             name="Fuel Type"
@@ -44,7 +38,7 @@ class EnergyCalculator extends Component {
             selectedOption={this.state.energyType}
           />
 
-          Previous reading
+          {/* <SectionTitle>Previous reading</SectionTitle>
           <EnergyInput
             energyAmount={e => {
               this.setState({ firstEnergyAmount: e.target.value });
@@ -55,10 +49,10 @@ class EnergyCalculator extends Component {
             }}
             energyType={this.state.energyType}
             readingType="first"
-          />
-          <br />
-          <br />
-          New reading
+          /> */}
+          <AddReadingSection title="Previous Reading"/>
+
+          <SectionTitle>New reading</SectionTitle>
           <EnergyInput
             energyAmount={e => {
               this.setState({ secondEnergyAmount: e.target.value });
@@ -70,9 +64,8 @@ class EnergyCalculator extends Component {
             energyType={this.state.energyType}
             readingType="second"
           />
-          <br />
-          <br />
-          Next statement date (optional)
+
+          <SectionTitle>Next statement date (optional)</SectionTitle>
           <NextStatementDateInput
             statementDate={e => {
               const nextStatementDate = new Date(`${e.target.value}`)
@@ -81,10 +74,9 @@ class EnergyCalculator extends Component {
 
             }}
           />
-          <br /><br />
+
           <button
             className="ui green button"
-            style={{ float: "right" }}
             onClick={this.onFormSubmit}
           >
             Calculate
