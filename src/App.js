@@ -4,7 +4,9 @@ import CalculatorResult from "./components/CalculatorResult";
 
 import differenceInDays from "date-fns/differenceInDays"
 // import { format } from "date-fns/esm/fp";
-import { subMonths } from "date-fns/fp";
+import subMonths from 'date-fns/subMonths'
+// import { subMonths } from "date-fns/fp";
+// import differenceInCalendarDays from 'date-fns/difference_in_calendar_days'
 // var differenceInDays = require('date-fns/differenceInDays')
 
 class App extends Component {
@@ -15,7 +17,10 @@ class App extends Component {
     priceTotal: null,
     daysTotal: null,
     energyTotal: null,
-    nextStatementDate: null
+    nextStatementDate: null,
+    nextStatementUnitTotal: null,
+    nextStatementStandingTotal: null,
+    nextStatementEnergyTotal: null
   };
 
   calculateResult = info => {
@@ -23,7 +28,7 @@ class App extends Component {
     // const timeAmount = info.secondReadingDate - info.firstReadingDate;
     // const daysTotal = Math.floor(timeAmount / 86400);
     // console.log(format("dd/MM/yyyy", info.secondReadingDate));
-    
+
     const daysTotal = differenceInDays(info.secondReadingDate, info.firstReadingDate);
     let unitTotal, standingTotal, priceTotal;
     //CALCULATE STANDING CHARGE
@@ -45,10 +50,19 @@ class App extends Component {
     priceTotal = unitTotal + standingTotal;
 
     //NEXT STATEMENT
-    console.log(info.nextStatementDate);
     const prevMonth = subMonths(info.nextStatementDate, 1);
-    console.log(prevMonth);
-    
+    const daysInStatement = differenceInDays(info.nextStatementDate, prevMonth)
+
+    const unitTotalOneDay = unitTotal / daysTotal;
+    const nextStatementUnitTotal = unitTotalOneDay * daysInStatement
+
+    const standingTotalOneDay = standingTotal / daysTotal;
+    const nextStatementStandingTotal = standingTotalOneDay * daysInStatement;
+
+    const nextStatementPriceTotal = nextStatementUnitTotal + nextStatementStandingTotal;
+
+    const energyTotalOneDay = energyTotal / daysTotal;
+    const nextStatementEnergyTotal = energyTotalOneDay * daysInStatement;
 
     this.setState({
       energyType: info.energyType,
@@ -57,12 +71,16 @@ class App extends Component {
       priceTotal,
       daysTotal,
       energyTotal,
-      nextStatementDate: info.nextStatementDate
+      nextStatementDate: info.nextStatementDate,
+      nextStatementUnitTotal,
+      nextStatementStandingTotal,
+      nextStatementPriceTotal,
+      nextStatementEnergyTotal
     });
   };
 
   render() {
-   
+
     console.log(this.state);
 
     let calculatorResult = null;
@@ -75,13 +93,17 @@ class App extends Component {
           priceTotal={this.state.priceTotal}
           daysTotal={this.state.daysTotal}
           energyTotal={this.state.energyTotal}
+          nextStatementUnitTotal={this.state.nextStatementUnitTotal}
+          nextStatementStandingTotal={this.state.nextStatementStandingTotal}
+          nextStatementPriceTotal={this.state.nextStatementPriceTotal}
+          nextStatementEnergyTotal={this.state.nextStatementEnergyTotal}
         />
       );
     }
 
     return (
       <div style={{ maxWidth: "400px", margin: "auto" }}>
-        <div className="ui container" style={{ marginTop: "20px" }}>
+        <div className="ui container" style={{ marginTop: "-20px" }}>
           <h1 style={{ textAlign: "center" }}>Energy Price Calculator</h1>
           <EnergyCalculator onSubmit={this.calculateResult} />
           {calculatorResult}

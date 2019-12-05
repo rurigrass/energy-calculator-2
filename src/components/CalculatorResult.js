@@ -40,20 +40,16 @@ const CalculatorResult = props => {
           <tbody>
             <tr>
               <td data-label="Usage">
-              2942
-              {/* {props.energyTotal} */}
+                {props.nextStatementEnergyTotal.toFixed(0)}
               </td>
               <td data-label="Energy Cost">
-              £ 382.78
-              {/* {props.unitTotal.toFixed(2)} */}
+                £ {props.nextStatementUnitTotal.toFixed(2)}
               </td>
               <td data-label="Standing Charge">
-              £ 6.13
-              {/* {props.standingTotal.toFixed(2)} */}
+                £ {props.nextStatementStandingTotal.toFixed(2)}
               </td>
               <td data-label="Total">
-              £ 388.90
-              {/* {props.priceTotal.toFixed(2)} */}
+                £ {props.nextStatementPriceTotal.toFixed(2)}
               </td>
             </tr>
           </tbody>

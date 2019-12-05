@@ -77,8 +77,6 @@ class EnergyCalculator extends Component {
             statementDate={e => {
               const nextStatementDate = new Date(`${e.target.value}`)
               this.setState({ nextStatementDate });
-              console.log(nextStatementDate);
-
             }}
           />
           <br /><br />
