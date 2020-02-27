@@ -1,21 +1,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  width: 50%;
+// const Wrapper = styled.div`
+//   width: 50%;
 
-  & > * {
-    margin: 0 1.5rem 1rem 0;
-  }
-`;
+//   & > * {
+//     margin: 0 1.5rem 1rem 0;
+//   }
+// `;
 
 const RadioGroup = props => {
   const { name, selectedOption, options, changeFn } = props;
 
-  
+
   return (
-    <Wrapper>
+    // <Wrapper>
+    <div>
+
       <h5>{name}</h5>
       {
         options.map((option => {
@@ -32,7 +34,8 @@ const RadioGroup = props => {
           );
         }))
       }
-    </Wrapper>
+    </div>
+    //  </Wrapper>
   );
 };
 RadioGroup.propTypes = {
