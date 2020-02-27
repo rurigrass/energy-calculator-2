@@ -24,6 +24,14 @@ class App extends Component {
   };
 
   calculateResult = info => {
+
+    //const postcode = //remove last 3 figures from post code
+    //loop through regions json to get region
+    //get tariffs
+    console.log(info);
+    
+
+
     const energyTotal = info.secondEnergyAmount - info.firstEnergyAmount;
     // const timeAmount = info.secondReadingDate - info.firstReadingDate;
     // const daysTotal = Math.floor(timeAmount / 86400);
@@ -32,17 +40,17 @@ class App extends Component {
     const daysTotal = differenceInDays(info.secondReadingDate, info.firstReadingDate);
     let unitTotal, standingTotal, priceTotal;
     //CALCULATE STANDING CHARGE
-    const longResult = daysTotal * 0.2044;
+    const longResult = daysTotal * 0.204435;
     standingTotal = longResult;
     //CALC UNIT CHARGE ELEC
     if (info.energyType === "Electricity") {
-      const longResult = energyTotal * 0.1301;
+      const longResult = energyTotal * info.tariff.elec;
       unitTotal = longResult;
     } else {
       //CALC UNIT CHARGE GAS
       const byVCF = energyTotal * 1.02264 * 40;
       const byCV = byVCF / 3.6;
-      const kWHCF = byCV * 0.03678;
+      const kWHCF = byCV * info.tariff.gas;
       unitTotal = kWHCF;
     }
     // console.log(unitTotal);
@@ -80,9 +88,6 @@ class App extends Component {
   };
 
   render() {
-
-    console.log(this.state);
-
     let calculatorResult = null;
     if (this.state.unitTotal) {
       calculatorResult = (

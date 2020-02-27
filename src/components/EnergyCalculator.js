@@ -5,6 +5,9 @@ import { Postcode } from './Postcode';
 import RadioGroup from './RadioToggle/RadioGroup';
 import NextStatementDateInput from "./NextStatementDateInput/NextStatementDateInput";
 
+import RegionByPostcode from "../data/RegionByPostcode";
+import TariffsByRegion from "../data/TariffsByRegion";
+
 class EnergyCalculator extends Component {
   state = {
     meterType: "1-rate",
@@ -13,7 +16,8 @@ class EnergyCalculator extends Component {
     firstReadingDate: null,
     secondEnergyAmount: null,
     secondReadingDate: null,
-    nextStatementDate: null
+    nextStatementDate: null,
+    tariff: null
   };
 
   onFormSubmit = event => {
@@ -21,11 +25,38 @@ class EnergyCalculator extends Component {
     this.props.onSubmit(this.state);
   };
 
+  filterPostcode = info => {
+    info = info.replace(/\s/g, '').toUpperCase()
+    const postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i;
+    if (postcodeRegEx.test(info)) {
+      console.log(true);
+      info = info.slice(0, -3)
+
+      const GSP = RegionByPostcode[info] && RegionByPostcode[info].GSP
+      // TODO validate that GSP exists and show error if not
+
+      const tariff = TariffsByRegion[GSP]
+      // TODO validate that we have the tariff and show error if we don't
+      console.log(GSP);
+      
+      this.setState({tariff})
+    } else {
+
+    }
+  }
   render() {
+
+    // if (this.state.region.length > 6) {console.log("hi")} 
+    // console.log(this.state.region);    
+
+
     return (
       <div className="ui compact segment">
         <form onSubmit={this.onFormSubmit} className="ui form">
-          <Postcode />
+          <Postcode
+            //brings back the postcode inputted 
+            regionFn={e => { this.filterPostcode(e.target.value) }}
+          />
           {/* <RadioGroup
             name="Meter Type"
             changeFn={e => {

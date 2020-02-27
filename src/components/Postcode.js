@@ -9,13 +9,18 @@ const Wrapper = styled.div`
     margin: 0 0 1rem 0;
   }
 `;
-export const Postcode = () => {
+export const Postcode = (props) => {
+
+  // const regionFn = (e) => {
+  //   console.log(e.target.value);
+  //   props.regionFn = e.target.value
+  // }
 
   return (
   <Wrapper>
     <label>Postcode</label>
     <div className="ui input">
-      <input type="text" />
+      <input type="text"  placeholder="Postcode" onChange={props.regionFn} />
     </div>
   </Wrapper>
   )
