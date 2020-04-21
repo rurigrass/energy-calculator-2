@@ -110,7 +110,8 @@ class EnergyCalculator extends Component {
               this.setState({ nextStatementDate });
             }}
           />
-          <br /><br />
+          <br />
+          <br />
           <button
             className="ui green button"
             style={{ float: "right" }}
